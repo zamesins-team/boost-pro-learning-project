@@ -42,20 +42,23 @@ export default async function HomePage() {
         ) : (
           <ul className="grid gap-3 sm:grid-cols-2">
             {services.map((s) => (
-              <li
-                key={s.id}
-                className="rounded-2xl border border-line bg-surface p-5 transition hover:border-brand/40 hover:shadow-[0_4px_24px_-12px_rgba(14,124,102,0.35)]"
-              >
-                <div className="flex items-start justify-between gap-3">
+              <li key={s.id}>
+                <a
+                  href={`/book?service=${s.id}`}
+                  className="group flex h-full items-start justify-between gap-3 rounded-2xl border border-line bg-surface p-5 transition hover:border-brand/40 hover:shadow-[0_4px_24px_-12px_rgba(14,124,102,0.35)]"
+                >
                   <div>
                     <h3 className="font-medium text-ink">{s.name}</h3>
                     {s.description && <p className="mt-1 text-sm text-muted">{s.description}</p>}
+                    <span className="mt-2 inline-block text-sm font-medium text-brand opacity-0 transition group-hover:opacity-100">
+                      Записаться →
+                    </span>
                   </div>
                   <div className="shrink-0 text-right">
                     <div className="font-semibold text-ink">{formatRub(s.priceRub)}</div>
                     <div className="text-xs text-muted">{formatDuration(s.durationMin)}</div>
                   </div>
-                </div>
+                </a>
               </li>
             ))}
           </ul>

@@ -29,6 +29,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Услуга не найдена" }, { status: 404 });
   }
 
+  const master = await prisma.master.findUnique({ where: { id: masterId } });
+  if (!master) {
+    return NextResponse.json({ error: "Мастер не найден" }, { status: 404 });
+  }
+
   const startAt = new Date(startISO);
   if (Number.isNaN(startAt.getTime())) {
     return NextResponse.json({ error: "Некорректная дата" }, { status: 400 });
